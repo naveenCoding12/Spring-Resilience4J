@@ -35,3 +35,11 @@ retry:
             registerHealthIndicator: true
             maxRetryAttempts: 3
             waitDuration: 10s
+
+    ratelimiter:
+        instances:
+            ServiceA:
+                registerHealthIndicator: true
+                limitForPeriod: 5                # allow 5 requests
+                limitRefreshPeriod: 1h          # in 1 hour
+                timeoutDuration: 0              # don't wait if limit is hit
