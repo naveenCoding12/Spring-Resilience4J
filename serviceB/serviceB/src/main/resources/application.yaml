@@ -1,0 +1,4 @@
+service:
+    name: "ServiceB"
+server:
+    port: 8081

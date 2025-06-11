@@ -1,0 +1,31 @@
+service:
+    name: "ServiceA"
+
+server:
+    port: 8080
+
+management:
+    health:
+        circuitBreakers:
+            enabled: true
+    endpoints:
+        web:
+            exposure:
+                include: health
+    endpoint:
+        health:
+            show-details: always
+
+resilience4j:
+    circuitbreaker:
+        instances:
+            ServiceA:
+                registerHealthIndicator: true
+                eventConsumerBufferSize: 10
+                failureRateThreshold: 50
+                minimumNumberOfCalls: 5
+                waitDurationInOpenState: 5s
+                automaticTransitionFromOpenToHalfOpenEnabled: true
+                permittedNumberOfCallsInHalfOpenState: 3
+                slidingWindowType: COUNT_BASED
+                slidingWindowSize: 10
